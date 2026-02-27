@@ -1,0 +1,54 @@
+name: Databricks Asset Bundles API
+description: API for managing Databricks Asset Bundles (DABs), which enable version control, deployment, and management of data and AI assets across Databricks workspaces
+image: https://www.databricks.com/sites/default/files/2023-05/databricks-logo.png
+created: '2024'
+modified: '2024'
+specificationVersion: '0.16'
+url: https://docs.databricks.com/dev-tools/bundles/
+apis:
+- name: Databricks Asset Bundles API
+  description: REST API endpoints for deploying, managing, and validating Databricks Asset Bundles
+  image: https://www.databricks.com/sites/default/files/2023-05/databricks-logo.png
+  humanUrl: https://docs.databricks.com/dev-tools/bundles/
+  baseUrl: https://<workspace-instance>.cloud.databricks.com/api/2.0
+  tags:
+  - bundles
+  - assets
+  - deployment
+  - workflows
+  - notebooks
+  - jobs
+  properties:
+  - type: documentation
+    url: https://docs.databricks.com/dev-tools/bundles/
+  - type: openapi
+    url: https://docs.databricks.com/api/workspace/bundles
+  - type: authentication
+    url: https://docs.databricks.com/dev-tools/auth/
+  contact:
+  - FN: Databricks Support
+    email: support@databricks.com
+    url: https://help.databricks.com/
+common:
+- type: getting-started
+  url: https://docs.databricks.com/dev-tools/bundles/get-started.html
+- type: tutorials
+  url: https://docs.databricks.com/dev-tools/bundles/tutorials.html
+- type: cli-reference
+  url: https://docs.databricks.com/dev-tools/cli/bundle-cli.html
+- type: authentication
+  url: https://docs.databricks.com/dev-tools/auth/
+- type: github
+  url: https://github.com/databricks/cli
+- type: pricing
+  url: https://www.databricks.com/product/pricing
+- type: status
+  url: https://status.databricks.com/
+- type: terms-of-service
+  url: https://www.databricks.com/legal/terms-of-use
+- type: privacy-policy
+  url: https://www.databricks.com/legal/privacy-notice
+maintainers:
+- FN: Databricks
+  email: support@databricks.com
+  url: https://www.databricks.com
