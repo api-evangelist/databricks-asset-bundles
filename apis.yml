@@ -1,54 +1,137 @@
-name: Databricks Asset Bundles API
-description: API for managing Databricks Asset Bundles (DABs), which enable version control, deployment, and management of data and AI assets across Databricks workspaces
+name: Databricks Asset Bundles
+description: >-
+  Databricks Asset Bundles (DABs) provide an infrastructure-as-code approach to
+  managing Databricks data and AI projects. Bundles enable version control,
+  CI/CD, deployment, and management of Databricks resources such as jobs,
+  pipelines, apps, schemas, experiments, and model serving endpoints across
+  workspaces using the Databricks CLI.
 image: https://www.databricks.com/sites/default/files/2023-05/databricks-logo.png
+tags:
+- Infrastructure As Code
+- CI/CD
+- Deployment
+- Databricks
+- Data Engineering
+- Machine Learning
+- Workflows
+- Pipelines
+- Jobs
+- MLOps
 created: '2024'
-modified: '2024'
-specificationVersion: '0.16'
-url: https://docs.databricks.com/dev-tools/bundles/
+modified: '2026-03-04'
+specificationVersion: '0.18'
+url: https://docs.databricks.com/aws/en/dev-tools/bundles
 apis:
 - name: Databricks Asset Bundles API
-  description: REST API endpoints for deploying, managing, and validating Databricks Asset Bundles
+  description: >-
+    The Databricks Asset Bundles API provides CLI-driven endpoints for
+    initializing, validating, deploying, running, and destroying bundles of
+    Databricks resources. Bundles define infrastructure and workspace settings
+    such as deployment targets, resource configurations for jobs, pipelines,
+    apps, and other assets, enabling programmatic lifecycle management of
+    Databricks projects across development, staging, and production
+    environments.
   image: https://www.databricks.com/sites/default/files/2023-05/databricks-logo.png
-  humanUrl: https://docs.databricks.com/dev-tools/bundles/
-  baseUrl: https://<workspace-instance>.cloud.databricks.com/api/2.0
+  humanURL: https://docs.databricks.com/aws/en/dev-tools/bundles
+  baseURL: https://<workspace-instance>.cloud.databricks.com/api/2.0
   tags:
-  - bundles
-  - assets
-  - deployment
-  - workflows
-  - notebooks
-  - jobs
+  - Bundles
+  - Deployment
+  - Infrastructure As Code
+  - CI/CD
+  - Workflows
   properties:
-  - type: documentation
-    url: https://docs.databricks.com/dev-tools/bundles/
-  - type: openapi
-    url: https://docs.databricks.com/api/workspace/bundles
-  - type: authentication
-    url: https://docs.databricks.com/dev-tools/auth/
+  - type: Documentation
+    url: https://docs.databricks.com/aws/en/dev-tools/bundles
+  - type: Reference
+    url: https://docs.databricks.com/aws/en/dev-tools/bundles/reference
+  - type: Authentication
+    url: https://docs.databricks.com/aws/en/dev-tools/bundles/authentication
+  - type: Getting Started
+    url: https://docs.databricks.com/aws/en/dev-tools/bundles/jobs-tutorial
+  - type: Change Log
+    url: https://docs.databricks.com/aws/en/release-notes/dev-tools/bundles
+  - type: FAQ
+    url: https://docs.databricks.com/aws/en/dev-tools/bundles/faqs
   contact:
   - FN: Databricks Support
     email: support@databricks.com
     url: https://help.databricks.com/
 common:
-- type: getting-started
-  url: https://docs.databricks.com/dev-tools/bundles/get-started.html
-- type: tutorials
-  url: https://docs.databricks.com/dev-tools/bundles/tutorials.html
-- type: cli-reference
-  url: https://docs.databricks.com/dev-tools/cli/bundle-cli.html
-- type: authentication
-  url: https://docs.databricks.com/dev-tools/auth/
-- type: github
+- type: Portal
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles
+- type: Getting Started
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/jobs-tutorial
+- type: Documentation
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/settings
+- type: Reference
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/reference
+- type: Tutorials
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/tutorials
+- type: CLI Reference
+  url: https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands
+- type: Authentication
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/authentication
+- type: Resources
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/resources
+- type: Templates
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/templates
+- type: Configuration Examples
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/examples
+- type: Permissions
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/permissions
+- type: Variables
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/variables
+- type: Deployment Modes
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/deployment-modes
+- type: Library Dependencies
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/library-dependencies
+- type: Python Wheel
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/python-wheel
+- type: Python Configuration
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/python
+- type: CI/CD
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/ci-cd-bundles
+- type: Migration Guide
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/migrate-resources
+- type: FAQ
+  url: https://docs.databricks.com/aws/en/dev-tools/bundles/faqs
+- type: Change Log
+  url: https://docs.databricks.com/aws/en/release-notes/dev-tools/bundles
+- type: GitHub Repository
   url: https://github.com/databricks/cli
-- type: pricing
+- type: GitHub Examples
+  url: https://github.com/databricks/bundle-examples
+- type: GitHub Action
+  url: https://github.com/databricks/setup-cli
+- type: Pricing
   url: https://www.databricks.com/product/pricing
-- type: status
+- type: Status
   url: https://status.databricks.com/
-- type: terms-of-service
+- type: Support
+  url: https://help.databricks.com/
+- type: Community
+  url: https://community.databricks.com/
+- type: Blog
+  url: https://www.databricks.com/blog
+- type: Website
+  url: https://www.databricks.com/
+- type: Login
+  url: https://login.databricks.com/
+- type: Sign Up
+  url: https://www.databricks.com/try-databricks
+- type: Terms of Service
   url: https://www.databricks.com/legal/terms-of-use
-- type: privacy-policy
-  url: https://www.databricks.com/legal/privacy-notice
+- type: Privacy Policy
+  url: https://www.databricks.com/legal/privacynotice
+- type: Security
+  url: https://www.databricks.com/trust
+- type: GitHub Organization
+  url: https://github.com/databricks
+- type: Training
+  url: https://www.databricks.com/learn/training/home
+- type: Contact
+  url: https://www.databricks.com/company/contact
 maintainers:
-- FN: Databricks
-  email: support@databricks.com
-  url: https://www.databricks.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
