@@ -1,0 +1,52 @@
+name: Databricks Asset Bundles Capabilities
+description: >-
+  Capabilities exposed by the Databricks Asset Bundles configuration model
+  and CLI for managing Databricks projects as code.
+capabilities:
+  - name: Bundle Initialization
+    description: Scaffold new bundles from templates using databricks bundle init.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Bundle Validation
+    description: Statically validate databricks.yml configuration with databricks bundle validate.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Bundle Deployment
+    description: Deploy resources and artifacts to a target workspace with databricks bundle deploy.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Bundle Run
+    description: Execute jobs, pipelines, or scripts declared in a bundle with databricks bundle run.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Bundle Destroy
+    description: Tear down all resources deployed by a bundle with databricks bundle destroy.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Target Environments
+    description: Define dev, staging, and prod targets with environment-specific overrides.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Variables and Lookups
+    description: Parameterize configuration with typed variables and workspace lookups.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Resource Modeling
+    description: Declare jobs, pipelines, apps, dashboards, models, schemas, and other resources.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Permissions
+    description: Apply CAN_VIEW, CAN_RUN, CAN_MANAGE, and IS_OWNER access on bundle resources.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Run As Identity
+    description: Execute jobs and pipelines as a specific user or service principal.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Artifact Builds
+    description: Build and upload Python wheels and JARs as part of deployment.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+  - name: Sync Control
+    description: Include and exclude files synced to the workspace via sync paths.
+    api: databricks-asset-bundles:databricks-asset-bundles-api
+use_cases:
+  - name: Infrastructure-as-code for data platforms
+    description: Manage jobs, pipelines, and Unity Catalog assets as version-controlled code.
+  - name: CI/CD for Databricks projects
+    description: Promote bundles across dev, staging, and prod through automated pipelines.
+  - name: Reusable project templates
+    description: Distribute bundle templates that bootstrap new data and ML projects.
+  - name: Multi-workspace deployments
+    description: Deploy the same bundle to multiple workspaces with target overrides.
+  - name: ML lifecycle management
+    description: Manage experiments, models, and serving endpoints together with their jobs.

@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "dab": "https://docs.databricks.com/aws/en/dev-tools/bundles/",
+    "Bundle": {
+      "@id": "dab:reference",
+      "@context": {
+        "name": "https://schema.org/name",
+        "uuid": "https://schema.org/identifier",
+        "databricks_cli_version": "https://schema.org/softwareVersion",
+        "git": "https://schema.org/codeRepository"
+      }
+    },
+    "Target": {
+      "@id": "dab:deployment-modes",
+      "@context": {
+        "name": "https://schema.org/name",
+        "mode": "https://schema.org/applicationCategory",
+        "default": "https://schema.org/option",
+        "workspace": "https://schema.org/serviceUrl"
+      }
+    },
+    "Resource": {
+      "@id": "dab:resources",
+      "@context": {
+        "name": "https://schema.org/name",
+        "type": "https://schema.org/additionalType",
+        "permissions": "https://schema.org/accessibilityControl"
+      }
+    },
+    "Variable": {
+      "@id": "dab:variables",
+      "@context": {
+        "name": "https://schema.org/name",
+        "description": "https://schema.org/description",
+        "default": "https://schema.org/defaultValue",
+        "type": "https://schema.org/additionalType",
+        "lookup": "https://schema.org/identifier"
+      }
+    },
+    "Artifact": {
+      "@id": "dab:library-dependencies",
+      "@context": {
+        "type": "https://schema.org/encodingFormat",
+        "build": "https://schema.org/instrument",
+        "path": "https://schema.org/url",
+        "executable": "https://schema.org/applicationCategory"
+      }
+    },
+    "Permission": {
+      "@id": "dab:permissions",
+      "@context": {
+        "level": "https://schema.org/permissions",
+        "user_name": "https://schema.org/identifier",
+        "group_name": "https://schema.org/identifier",
+        "service_principal_name": "https://schema.org/identifier"
+      }
+    },
+    "RunAs": {
+      "@id": "dab:reference",
+      "@context": {
+        "user_name": "https://schema.org/agent",
+        "service_principal_name": "https://schema.org/agent"
+      }
+    },
+    "Workspace": {
+      "@id": "dab:authentication",
+      "@context": {
+        "host": "https://schema.org/url",
+        "profile": "https://schema.org/identifier",
+        "root_path": "https://schema.org/contentLocation"
+      }
+    }
+  }
+}

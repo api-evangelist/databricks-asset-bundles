@@ -1,0 +1,63 @@
+name: Databricks Asset Bundles Vocabulary
+description: >-
+  Shared vocabulary of terms used across the Databricks Asset Bundles
+  configuration model and CLI surface.
+terms:
+  - term: Bundle
+    definition: >-
+      A versioned collection of Databricks resources, configuration, and
+      source files declared in databricks.yml that can be deployed and run
+      as a unit.
+  - term: databricks.yml
+    definition: >-
+      The top-level configuration file at the root of a bundle that declares
+      bundle metadata, workspace connection, resources, targets, and
+      variables.
+  - term: Target
+    definition: >-
+      A named environment such as dev, staging, or prod whose overrides
+      change workspace, resource, and run-as settings for a single bundle.
+  - term: Resource
+    definition: >-
+      A Databricks object such as a job, pipeline, app, model, dashboard,
+      catalog, or schema declared inside the bundle resources block.
+  - term: Mode
+    definition: >-
+      A deployment style for a target, either development or production,
+      that adjusts naming prefixes, scheduling, and permissions.
+  - term: Variable
+    definition: >-
+      A typed, named value that can be referenced from other parts of the
+      bundle and supplied via command line, environment, or lookup.
+  - term: Lookup
+    definition: >-
+      A variable resolution strategy that fetches a value from a Databricks
+      workspace object such as a cluster or warehouse.
+  - term: Artifact
+    definition: >-
+      A build output, such as a Python wheel or JAR, automatically built
+      and uploaded by the CLI during bundle deployment.
+  - term: Permission
+    definition: >-
+      An access control entry granting CAN_VIEW, CAN_RUN, CAN_MANAGE, or
+      IS_OWNER to a user, group, or service principal on bundle resources.
+  - term: Run As
+    definition: >-
+      The identity, either a user or service principal, used to execute
+      jobs and pipelines deployed by the bundle.
+  - term: Sync
+    definition: >-
+      The file synchronization configuration that controls which files are
+      uploaded to the workspace during deployment.
+  - term: Script
+    definition: >-
+      A named shell command declared in the bundle that can be executed via
+      databricks bundle run.
+  - term: Preset
+    definition: >-
+      A reusable deployment behavior block applied across resources within
+      a bundle or target.
+  - term: Workspace
+    definition: >-
+      A Databricks workspace bound to a bundle through host, profile, or
+      authentication metadata.

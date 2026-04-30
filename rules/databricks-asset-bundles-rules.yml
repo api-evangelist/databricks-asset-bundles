@@ -1,0 +1,46 @@
+extends:
+  - spectral:oas
+rules:
+  dab-bundle-required:
+    description: Bundle root must include a bundle block with a name.
+    given: $
+    severity: error
+    then:
+      field: bundle
+      function: truthy
+  dab-target-mode-enum:
+    description: Target mode must be development or production.
+    given: $.targets[*].mode
+    severity: warn
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - development
+          - production
+  dab-workspace-root-path:
+    description: Workspace root_path should begin with /Workspace or /Volumes.
+    given: $.workspace.root_path
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/Workspace|^/Volumes"
+  dab-permission-level-enum:
+    description: Permission levels must be CAN_VIEW, CAN_RUN, CAN_MANAGE, or IS_OWNER.
+    given: $.permissions[*].level
+    severity: error
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - CAN_VIEW
+          - CAN_RUN
+          - CAN_MANAGE
+          - IS_OWNER
+  dab-single-default-target:
+    description: Only one target may be marked default true.
+    given: $.targets
+    severity: warn
+    then:
+      function: truthy

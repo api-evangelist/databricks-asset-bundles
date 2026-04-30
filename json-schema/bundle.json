@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/databricks-asset-bundles/main/json-schema/bundle.json",
+  "title": "Databricks Asset Bundle",
+  "description": "Top-level configuration for a Databricks Asset Bundle (databricks.yml).",
+  "type": "object",
+  "required": ["bundle"],
+  "additionalProperties": false,
+  "properties": {
+    "bundle": {
+      "type": "object",
+      "description": "Core bundle metadata.",
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string", "description": "Programmatic bundle name."},
+        "uuid": {"type": "string", "description": "Optional unique bundle identifier."},
+        "databricks_cli_version": {"type": "string", "description": "Semver constraint for the Databricks CLI."},
+        "git": {
+          "type": "object",
+          "properties": {
+            "branch": {"type": "string"},
+            "origin_url": {"type": "string", "format": "uri"}
+          }
+        },
+        "deployment": {"type": "object"}
+      }
+    },
+    "include": {
+      "type": "array",
+      "description": "Glob patterns of additional configuration files to include.",
+      "items": {"type": "string"}
+    },
+    "workspace": {
+      "type": "object",
+      "description": "Workspace connection and path settings.",
+      "properties": {
+        "host": {"type": "string", "format": "uri"},
+        "profile": {"type": "string"},
+        "auth_type": {"type": "string"},
+        "root_path": {"type": "string", "pattern": "^/Workspace|^/Volumes"},
+        "file_path": {"type": "string"},
+        "artifact_path": {"type": "string"},
+        "state_path": {"type": "string"}
+      }
+    },
+    "variables": {
+      "type": "object",
+      "description": "Custom variable declarations.",
+      "additionalProperties": {
+        "oneOf": [
+          {"type": "string"},
+          {
+            "type": "object",
+            "properties": {
+              "description": {"type": "string"},
+              "default": {},
+              "type": {"type": "string"},
+              "lookup": {"type": "object"}
+            }
+          }
+        ]
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "description": "Artifacts (such as Python wheels) built during deployment.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string", "enum": ["whl", "jar"]},
+          "build": {"type": "string"},
+          "executable": {"type": "string"},
+          "path": {"type": "string"},
+          "files": {"type": "array", "items": {"type": "object"}}
+        }
+      }
+    },
+    "resources": {
+      "$ref": "#/$defs/resources"
+    },
+    "targets": {
+      "type": "object",
+      "description": "Environment-specific overrides (dev, staging, prod).",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "default": {"type": "boolean"},
+          "mode": {"type": "string", "enum": ["development", "production"]},
+          "workspace": {"$ref": "#/properties/workspace"},
+          "variables": {"$ref": "#/properties/variables"},
+          "resources": {"$ref": "#/$defs/resources"},
+          "presets": {"type": "object"},
+          "run_as": {"type": "object"},
+          "permissions": {"type": "array", "items": {"$ref": "#/$defs/permission"}},
+          "sync": {"type": "object"}
+        }
+      }
+    },
+    "permissions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/permission"}
+    },
+    "presets": {
+      "type": "object",
+      "description": "Deployment behavior customization across resources."
+    },
+    "run_as": {
+      "type": "object",
+      "description": "Identity used to run jobs and pipelines.",
+      "properties": {
+        "user_name": {"type": "string"},
+        "service_principal_name": {"type": "string"}
+      }
+    },
+    "scripts": {
+      "type": "object",
+      "description": "Named commands executable via 'databricks bundle run'.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "content": {"type": "string"}
+        }
+      }
+    },
+    "sync": {
+      "type": "object",
+      "description": "File inclusion and exclusion patterns for deployment sync.",
+      "properties": {
+        "include": {"type": "array", "items": {"type": "string"}},
+        "exclude": {"type": "array", "items": {"type": "string"}},
+        "paths": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "experimental": {
+      "type": "object",
+      "description": "Beta feature flags."
+    },
+    "python": {
+      "type": "object",
+      "description": "Python loader and mutator configuration."
+    }
+  },
+  "$defs": {
+    "permission": {
+      "type": "object",
+      "required": ["level"],
+      "properties": {
+        "level": {"type": "string", "enum": ["CAN_VIEW", "CAN_RUN", "CAN_MANAGE", "IS_OWNER"]},
+        "user_name": {"type": "string"},
+        "service_principal_name": {"type": "string"},
+        "group_name": {"type": "string"}
+      }
+    },
+    "resources": {
+      "type": "object",
+      "description": "Databricks resources to deploy as part of the bundle.",
+      "properties": {
+        "alerts": {"type": "object"},
+        "apps": {"type": "object"},
+        "catalogs": {"type": "object"},
+        "clusters": {"type": "object"},
+        "dashboards": {"type": "object"},
+        "database_catalogs": {"type": "object"},
+        "database_instances": {"type": "object"},
+        "experiments": {"type": "object"},
+        "external_locations": {"type": "object"},
+        "jobs": {"type": "object"},
+        "model_serving_endpoints": {"type": "object"},
+        "models": {"type": "object"},
+        "pipelines": {"type": "object"},
+        "postgres_branches": {"type": "object"},
+        "postgres_endpoints": {"type": "object"},
+        "postgres_projects": {"type": "object"},
+        "quality_monitors": {"type": "object"},
+        "registered_models": {"type": "object"},
+        "schemas": {"type": "object"},
+        "secret_scopes": {"type": "object"},
+        "sql_warehouses": {"type": "object"},
+        "synced_database_tables": {"type": "object"},
+        "volumes": {"type": "object"}
+      }
+    }
+  }
+}
