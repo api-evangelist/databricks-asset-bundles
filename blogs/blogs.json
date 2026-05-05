@@ -1,0 +1,13 @@
+{
+  "repo": "databricks-asset-bundles",
+  "feeds": [
+    {
+      "source": "https://www.databricks.com/blog",
+      "feed_url": "https://www.databricks.com/blog/feed.xml",
+      "saved": 10,
+      "title": "Databricks"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:26:59Z"
+}
