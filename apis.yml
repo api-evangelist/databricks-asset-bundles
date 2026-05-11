@@ -149,6 +149,10 @@ common:
     url: capabilities/databricks-asset-bundles-capabilities.yml
   - type: Rules
     url: rules/databricks-asset-bundles-rules.yml
+  - type: Integrations
+    url: https://www.databricks.com/partners
+integrations:
+  - name: Partner Spotlight Featured partner announcements
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
