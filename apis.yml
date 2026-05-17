@@ -24,7 +24,7 @@ url: >-
 created: '2024-01-01'
 modified: '2026-04-28'
 specificationVersion: '0.19'
-xType: company
+kind: company
 position: Consumer
 access: 3rd-Party
 apis:
@@ -54,9 +54,9 @@ apis:
         url: https://docs.databricks.com/aws/en/dev-tools/bundles/reference
       - type: Authentication
         url: https://docs.databricks.com/aws/en/dev-tools/bundles/authentication
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.databricks.com/aws/en/dev-tools/bundles/jobs-tutorial
-      - type: Change Log
+      - type: ChangeLog
         url: https://docs.databricks.com/aws/en/release-notes/dev-tools/bundles
       - type: FAQ
         url: https://docs.databricks.com/aws/en/dev-tools/bundles/faqs
@@ -69,7 +69,7 @@ apis:
 common:
   - type: Portal
     url: https://docs.databricks.com/aws/en/dev-tools/bundles
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.databricks.com/aws/en/dev-tools/bundles/jobs-tutorial
   - type: Documentation
     url: https://docs.databricks.com/aws/en/dev-tools/bundles/settings
@@ -105,9 +105,9 @@ common:
     url: https://docs.databricks.com/aws/en/dev-tools/bundles/migrate-resources
   - type: FAQ
     url: https://docs.databricks.com/aws/en/dev-tools/bundles/faqs
-  - type: Change Log
+  - type: ChangeLog
     url: https://docs.databricks.com/aws/en/release-notes/dev-tools/bundles
-  - type: GitHub Repository
+  - type: GitHubRepository
     url: https://github.com/databricks/cli
   - type: GitHub Examples
     url: https://github.com/databricks/bundle-examples
@@ -115,7 +115,7 @@ common:
     url: https://github.com/databricks/setup-cli
   - type: Pricing
     url: https://www.databricks.com/product/pricing
-  - type: Status
+  - type: StatusPage
     url: https://status.databricks.com/
   - type: Support
     url: https://help.databricks.com/
@@ -127,21 +127,21 @@ common:
     url: https://www.databricks.com/
   - type: Login
     url: https://login.databricks.com/
-  - type: Sign Up
+  - type: SignUp
     url: https://www.databricks.com/try-databricks
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.databricks.com/legal/terms-of-use
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.databricks.com/legal/privacynotice
   - type: Security
     url: https://www.databricks.com/trust
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/databricks
   - type: Training
     url: https://www.databricks.com/learn/training/home
   - type: Contact
     url: https://www.databricks.com/company/contact
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/databricks-asset-bundles-context.jsonld
   - type: Vocabulary
     url: vocabulary/databricks-asset-bundles-vocabulary.yml
