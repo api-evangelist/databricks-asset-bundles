@@ -151,6 +151,8 @@ common:
     url: rules/databricks-asset-bundles-rules.yml
   - type: Integrations
     url: https://www.databricks.com/partners
+  - type: LLMsTxt
+    url: https://docs.databricks.com/llms.txt
 integrations:
   - name: Partner Spotlight Featured partner announcements
 maintainers:
