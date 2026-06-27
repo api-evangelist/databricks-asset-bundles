@@ -127,7 +127,7 @@ common:
     url: https://www.databricks.com/
   - type: Login
     url: https://login.databricks.com/
-  - type: SignUp
+  - type: Signup
     url: https://www.databricks.com/try-databricks
   - type: TermsOfService
     url: https://www.databricks.com/legal/terms-of-use
@@ -151,7 +151,7 @@ common:
     url: rules/databricks-asset-bundles-rules.yml
   - type: Integrations
     url: https://www.databricks.com/partners
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.databricks.com/llms.txt
 integrations:
   - name: Partner Spotlight Featured partner announcements
