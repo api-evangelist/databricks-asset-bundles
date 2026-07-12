@@ -67,6 +67,10 @@ apis:
         email: support@databricks.com
         url: https://help.databricks.com/
 common:
+  - type: VulnerabilityDisclosure
+    url: security/databricks-asset-bundles-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/databricks-asset-bundles-domain-security.yml
   - type: Portal
     url: https://docs.databricks.com/aws/en/dev-tools/bundles
   - type: GettingStarted
