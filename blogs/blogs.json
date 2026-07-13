@@ -5,7 +5,7 @@
       "source": "https://www.databricks.com/blog/feed.xml",
       "feed_url": "https://www.databricks.com/blog/feed.xml",
       "title": "",
-      "saved": 9,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -13,6 +13,6 @@
       "error": "HTTPError"
     }
   ],
-  "post_count": 78,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 96,
+  "fetched": "2026-07-11T11:50:51Z"
 }
