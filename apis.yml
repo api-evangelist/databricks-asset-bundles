@@ -7,6 +7,18 @@ description: >-
   pipelines, apps, schemas, experiments, and model serving endpoints across
   workspaces using the Databricks CLI.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 image: https://www.databricks.com/sites/default/files/2023-05/databricks-logo.png
 tags:
   - CI/CD
