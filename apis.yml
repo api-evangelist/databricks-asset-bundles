@@ -79,6 +79,12 @@ apis:
         email: support@databricks.com
         url: https://help.databricks.com/
 common:
+  - type: IssueTracker
+    url: https://github.com/databricks/cli/issues
+  - type: Releases
+    url: https://github.com/databricks/cli/releases
+  - type: SecurityPolicy
+    url: https://github.com/databricks/cli/blob/main/SECURITY.md
   - type: VulnerabilityDisclosure
     url: security/databricks-asset-bundles-vulnerability-disclosure.yml
   - type: DomainSecurity
@@ -161,8 +167,6 @@ common:
     url: json-ld/databricks-asset-bundles-context.jsonld
   - type: Vocabulary
     url: vocabulary/databricks-asset-bundles-vocabulary.yml
-  - type: Capabilities
-    url: capabilities/databricks-asset-bundles-capabilities.yml
   - type: Rules
     url: rules/databricks-asset-bundles-rules.yml
   - type: Integrations
