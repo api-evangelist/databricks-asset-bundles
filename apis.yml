@@ -35,7 +35,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/databricks-asset-bundles/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-04-28'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 kind: company
 position: Consumer
 access: 3rd-Party
