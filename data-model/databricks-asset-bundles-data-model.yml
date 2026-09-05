@@ -1,0 +1,164 @@
+generated: '2026-09-05'
+method: derived
+source: json-schema/databricks-asset-bundles-bundle-jsonschema.json (first-party, fetched 2026-09-05
+  from https://raw.githubusercontent.com/databricks/cli/main/bundle/schema/jsonschema.json)
+note: Derived mechanically from the Databricks-published bundle JSON Schema. Entity names and
+  the resource list are read out of the schema, not written by hand; no relationship is asserted
+  that the schema does not express.
+root: databricks.yml
+entities:
+- name: Bundle
+  path: bundle
+  description: Core bundle identity — name, uuid, databricks_cli_version constraint, git origin,
+    deployment settings.
+  relationships:
+  - kind: has_many
+    to: Target
+    via: targets
+  - kind: has_many
+    to: Resource
+    via: resources
+  - kind: has_many
+    to: Variable
+    via: variables
+  - kind: has_one
+    to: Workspace
+    via: workspace
+- name: Workspace
+  path: workspace
+  description: Workspace connection and path defaults — host, profile, auth_type, root_path.
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: workspace
+- name: Target
+  path: targets
+  description: A named environment (dev/staging/prod) whose overrides replace workspace, resource,
+    preset and run_as settings for one deployment.
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: targets
+  - kind: has_one
+    to: Workspace
+    via: targets.<name>.workspace
+  - kind: has_many
+    to: Resource
+    via: targets.<name>.resources
+  - kind: has_one
+    to: Presets
+    via: targets.<name>.presets
+- name: Resource
+  path: resources
+  description: A Databricks object the bundle owns. The schema defines 34 resource collections.
+  resource_types:
+  - alerts
+  - apps
+  - catalogs
+  - cluster_policies
+  - clusters
+  - dashboards
+  - database_catalogs
+  - database_instances
+  - experiments
+  - external_locations
+  - genie_spaces
+  - instance_pools
+  - job_runs
+  - jobs
+  - model_serving_endpoints
+  - models
+  - pipelines
+  - postgres_branches
+  - postgres_catalogs
+  - postgres_databases
+  - postgres_endpoints
+  - postgres_projects
+  - postgres_roles
+  - postgres_synced_tables
+  - quality_monitors
+  - registered_models
+  - schemas
+  - secret_scopes
+  - secrets
+  - sql_warehouses
+  - synced_database_tables
+  - vector_search_endpoints
+  - vector_search_indexes
+  - volumes
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: resources
+  - kind: has_many
+    to: Permission
+    via: resources.<type>.<name>.permissions
+- name: Variable
+  path: variables
+  description: A typed named value referenced elsewhere in the bundle; may resolve by lookup
+    against a workspace object.
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: variables
+- name: Artifact
+  path: artifacts
+  description: A build output (Python wheel, JAR) built and uploaded by the CLI during deploy.
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: artifacts
+  - kind: has_many
+    to: Resource
+    via: library reference
+- name: Permission
+  path: permissions
+  description: An access grant applied to bundle-declared resources.
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: permissions
+- name: Presets
+  path: presets
+  description: Cross-cutting defaults (name prefix, tags, pause status, concurrency) applied
+    to every resource in a target.
+  relationships:
+  - kind: belongs_to
+    to: Target
+    via: presets
+- name: Sync
+  path: sync
+  description: File inclusion/exclusion and sync paths for what is uploaded to the workspace.
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: sync
+- name: Scripts
+  path: scripts
+  description: Named scripts runnable as bundle hooks.
+  relationships:
+  - kind: belongs_to
+    to: Bundle
+    via: scripts
+top_level_mappings:
+- artifacts
+- bundle
+- environments
+- experimental
+- include
+- permissions
+- presets
+- python
+- resources
+- run_as
+- scripts
+- sync
+- targets
+- variables
+- workspace
+resource_type_count: 34
+id_prefixes: null
+gaps:
+- Databricks publishes no OpenAPI, so no operation-level entity graph could be derived; this
+  graph describes the configuration model the schema defines, which is the contract this product
+  actually ships.

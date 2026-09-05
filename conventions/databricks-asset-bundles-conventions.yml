@@ -1,0 +1,171 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands ;
+  https://docs.databricks.com/aws/en/dev-tools/bundles/deployment-modes ;
+  https://docs.databricks.com/aws/en/dev-tools/bundles/settings ;
+  https://docs.databricks.com/aws/en/dev-tools/bundles/authentication
+scope_note: >-
+  This product is a declarative CLI over the Databricks REST APIs, not an HTTP
+  API of its own. The cross-cutting semantics below are therefore recorded at
+  the level a consumer actually meets them — bundle commands and databricks.yml
+  — and where an HTTP-shaped convention simply does not exist (pagination,
+  error envelope, rate-limit headers) that is said plainly rather than
+  back-filled from the platform.
+auth_style:
+  model: unified Databricks client authentication chain
+  preferred: OAuth U2M (attended) / OAuth M2M service principal (unattended)
+  credentials_in_config: false
+  note: >-
+    databricks.yml never carries a secret. Credentials come from a named
+    configuration profile or environment variables, selected per command with
+    -p/--profile or per target with workspace.profile.
+  reference: ../authentication/databricks-asset-bundles-authentication.yml
+idempotency:
+  coverage: partial
+  mechanism: declarative convergence plus a server-side deployment lock
+  header: null
+  scope:
+    - bundle deploy
+    - bundle destroy
+    - bundle sync
+    - bundle validate
+    - bundle plan
+    - bundle summary
+  not_covered:
+    - bundle run
+  description: >-
+    There is no Idempotency-Key header, because there is no request the caller
+    constructs. Replay safety comes from the model instead: databricks.yml
+    declares desired state, and re-running `databricks bundle deploy` with
+    unchanged configuration converges to the same workspace state rather than
+    creating duplicates. A deployment lock serialises concurrent deploys against
+    one target (`--force-lock` overrides it; development mode disables it "for
+    faster iteration"). `bundle plan` shows the diff without making changes.
+  why_not_full: >-
+    `databricks bundle run` is explicitly NOT replay-safe — it triggers a job,
+    pipeline or app execution, and running it twice runs the work twice. Because
+    one command on the mutating surface has no replay protection, coverage is
+    partial, not full.
+  retention: null
+  docs: https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands
+dry_run_mode:
+  supported: true
+  mechanisms:
+    - command: databricks bundle validate
+      description: Validate bundle configuration syntax without contacting the deployment surface.
+    - command: databricks bundle plan
+      description: >-
+        "Show deployment plan without making changes" — the rehearsal step
+        before deploy, scopable to named resources with --select.
+    - command: databricks bundle sync --dry-run
+      description: Report which files would be synchronized without writing them.
+  docs: https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands
+reversibility:
+  grade: documented
+  summary: >-
+    Every write surface has a reversal path, and none of them has a
+    provider-stated window. Recorded as `documented` (reversal exists) rather
+    than `verified` (reversal plus a stated window), because Databricks does not
+    publish a time limit inside which any of these reversals is guaranteed to
+    work.
+  surfaces:
+    - write: databricks bundle deploy
+      reversal: databricks bundle destroy
+      reversal_description: >-
+        "Delete previously-deployed jobs, pipelines, and artifacts." Removes
+        what the deploy created for that target.
+      window: not-stated
+      docs: https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands
+    - write: databricks bundle deploy
+      reversal: re-deploy a previous revision
+      reversal_description: >-
+        Because the bundle is the source of truth in version control, checking
+        out the prior commit and re-deploying converges the workspace back. This
+        is a property of the declarative model, not a documented rollback
+        command.
+      window: not-stated
+      confidence: derived-from-model
+    - write: databricks bundle deployment bind
+      reversal: databricks bundle deployment unbind
+      reversal_description: >-
+        Unbind releases a bundle resource from the pre-existing workspace object
+        it was bound to.
+      window: not-stated
+    - write: databricks bundle run
+      reversal: none
+      reversal_description: >-
+        A triggered job, pipeline or app run cannot be un-run. Cancellation of
+        an in-flight run is a workspace operation, not a bundle one.
+      window: na
+  caution: >-
+    No restore window is asserted anywhere in this file. `bundle destroy` is
+    documented as a delete; Databricks does not publish a period inside which a
+    destroyed bundle deployment can be recovered, so none is claimed.
+pagination:
+  applicable: false
+  note: No paged collection surface — the CLI renders whole bundle state, not pages.
+versioning:
+  style: CLI semver; bundles pin with bundle.databricks_cli_version
+  reference: ../lifecycle/databricks-asset-bundles-lifecycle.yml
+error_envelope:
+  style: CLI diagnostics (stderr text / --output json), not an HTTP problem document
+  rfc9457: false
+  note: >-
+    Bundle validation and deployment errors are emitted as CLI diagnostics with
+    a file/line location in databricks.yml. There is no documented machine
+    error-code registry for bundles, and none is invented here.
+rate_limit_signal:
+  surfaced_by_product: false
+  note: >-
+    The CLI inherits the Databricks REST API limits it calls through; those are
+    documented as per-workspace request rates with no published response
+    headers.
+  reference: ../rate-limits/databricks-asset-bundles-rate-limits.yml
+config_conventions:
+  root_file: databricks.yml
+  root_file_rule: >-
+    "a bundle must contain one (and only one) configuration file named
+    databricks.yml at the root of the bundle project folder"
+  top_level_mappings:
+    - bundle
+    - variables
+    - workspace
+    - artifacts
+    - include
+    - resources
+    - sync
+    - targets
+    - permissions
+    - run_as
+    - scripts
+    - presets
+    - python
+    - experimental
+    - environments
+  property_casing: snake_case
+  schema: ../json-schema/databricks-asset-bundles-bundle-jsonschema.json
+  schema_command: databricks bundle schema
+deployment_modes:
+  docs: https://docs.databricks.com/aws/en/dev-tools/bundles/deployment-modes
+  modes:
+  - mode: development
+    effects:
+      - 'Prefixes resources with "[dev ${workspace.current_user.short_name}]" and applies a dev tag'
+      - 'Marks all Lakeflow pipelines development: true'
+      - Pauses all schedules and triggers on deployed resources
+      - Enables concurrent runs on all deployed jobs for faster iteration
+      - Disables the deployment lock for faster iteration
+      - Allows cluster override with --cluster-id
+  - mode: production
+    effects:
+      - 'Validates that deployed Lakeflow pipelines are development: false'
+      - Validates the current Git branch matches the branch specified in the target (overridable with --force)
+      - Recommends service principals and validated path mappings/permissions
+      - Does not allow cluster definition overrides
+cross_links:
+  authentication: ../authentication/databricks-asset-bundles-authentication.yml
+  lifecycle: ../lifecycle/databricks-asset-bundles-lifecycle.yml
+  rate_limits: ../rate-limits/databricks-asset-bundles-rate-limits.yml
+  scopes: ../scopes/databricks-asset-bundles-scopes.yml
+  cli: ../cli/databricks-asset-bundles-cli.yml

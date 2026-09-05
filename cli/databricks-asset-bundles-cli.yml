@@ -1,0 +1,82 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands
+repository: https://github.com/databricks/cli
+name: Databricks CLI
+binary: databricks
+language: Go
+version: v1.15.0
+version_released: '2026-09-03'
+summary: >-
+  The Databricks CLI is the entire runtime surface of Declarative Automation
+  Bundles. There is no bundle-specific HTTP API: `databricks bundle` reads
+  databricks.yml, resolves variables and target overrides, and drives the
+  Databricks REST APIs on the developer's behalf.
+install:
+  - method: homebrew
+    command: brew tap databricks/tap && brew install databricks
+  - method: script
+    command: curl -fsSL https://raw.githubusercontent.com/databricks/cli/main/install.sh | sh
+  - method: github-releases
+    url: https://github.com/databricks/cli/releases
+  - method: github-action
+    url: https://github.com/databricks/setup-cli
+    note: First-party GitHub Action that installs the CLI in CI.
+command_groups:
+  - group: bundle
+    description: Author, validate, plan, deploy, run and tear down bundles.
+    commands:
+      - name: bundle init
+        description: Initialize a new bundle using a template.
+      - name: bundle validate
+        description: Validate bundle configuration syntax.
+        mutating: false
+      - name: bundle plan
+        description: Show the deployment plan without making changes.
+        mutating: false
+        flags: ['--force', '--select']
+      - name: bundle deploy
+        description: Deploy a bundle to the remote workspace.
+        mutating: true
+        flags: ['--auto-approve', '--force', '--force-lock', '--select', '--cluster-id']
+      - name: bundle run
+        description: Execute a job, pipeline, app, or script defined in the bundle.
+        mutating: true
+      - name: bundle destroy
+        description: Delete previously-deployed jobs, pipelines, and artifacts.
+        mutating: true
+        flags: ['--auto-approve', '--force-lock']
+      - name: bundle sync
+        description: Synchronize file changes to the remote workspace.
+        mutating: true
+        flags: ['--dry-run', '--full', '--watch']
+      - name: bundle generate
+        description: Generate bundle configuration for resources that already exist in the workspace.
+      - name: bundle summary
+        description: Output a summary of bundle identity and resources.
+        mutating: false
+      - name: bundle schema
+        description: Display the JSON Schema for bundle configuration.
+        mutating: false
+      - name: bundle open
+        description: Navigate to a bundle resource in the workspace.
+      - name: bundle deployment
+        description: Deployment-related commands (bind, migrate, unbind).
+      - name: bundle migrate
+        description: Migrate a bundle to the direct deployment engine.
+  - group: bundle-deployments
+    description: Manage deployment metadata and history.
+  - group: auth
+    description: >-
+      OAuth U2M login, profile management and token inspection — the credential
+      chain every bundle command resolves through.
+key_flows:
+  - name: Scaffold a bundle
+    steps: ['databricks bundle init', 'edit databricks.yml', 'databricks bundle validate']
+  - name: Rehearse then deploy
+    steps: ['databricks bundle validate', 'databricks bundle plan -t dev', 'databricks bundle deploy -t dev']
+  - name: Promote to production
+    steps: ['databricks bundle plan -t prod', 'databricks bundle deploy -t prod', 'databricks bundle run -t prod <resource>']
+  - name: Tear down
+    steps: ['databricks bundle destroy -t dev']
+distribution_reference: ../packages/databricks-asset-bundles-packages.yml

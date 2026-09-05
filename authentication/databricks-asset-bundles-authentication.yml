@@ -1,0 +1,81 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.databricks.com/aws/en/dev-tools/bundles/authentication
+docs: https://docs.databricks.com/aws/en/dev-tools/bundles/authentication
+probe_evidence:
+  - url: https://accounts.cloud.databricks.com/oidc/.well-known/oauth-authorization-server
+    status: 200
+  - url: https://accounts.cloud.databricks.com/oidc/.well-known/openid-configuration
+    status: 200
+note: >-
+  There is no OpenAPI for this product to derive securitySchemes from
+  (derive-authentication.py found zero schemes because no spec exists). This
+  profile is read from the provider's own bundle-authentication documentation
+  and from the RFC 8414 authorization server metadata Databricks serves
+  anonymously.
+summary: >-
+  Declarative Automation Bundles never carry credentials in databricks.yml.
+  Authentication is resolved by the Databricks CLI through the unified
+  Databricks client authentication chain — a named configuration profile, or
+  environment variables — and the recommended methods are OAuth U2M for
+  attended work and OAuth M2M (service principal) for CI/CD.
+schemes:
+  - id: oauth-u2m
+    type: oauth2
+    flow: authorization_code
+    pkce: S256
+    label: OAuth user-to-machine (U2M)
+    recommended_for: attended / interactive bundle work
+    description: >-
+      `databricks auth login` runs the browser authorization-code flow and
+      writes a Databricks configuration profile automatically. This is the
+      method the bundle documentation names first.
+    authorization_endpoint: https://accounts.cloud.databricks.com/oidc/v1/authorize
+    token_endpoint: https://accounts.cloud.databricks.com/oidc/v1/token
+  - id: oauth-m2m
+    type: oauth2
+    flow: client_credentials
+    label: OAuth machine-to-machine (M2M)
+    recommended_for: unattended / CI/CD bundle deployment
+    description: >-
+      A service principal's client ID and secret exchanged at the token
+      endpoint. The bundle documentation names this the preferred unattended
+      method because "CI/CD systems are typically optimized for" environment
+      variables.
+    token_endpoint: https://accounts.cloud.databricks.com/oidc/v1/token
+  - id: pat
+    type: http
+    scheme: bearer
+    label: Personal access token
+    status: legacy
+    description: >-
+      A Databricks personal access token, for a user or for a service
+      principal. The documentation classes it as the legacy alternative to
+      OAuth for both attended and unattended scenarios.
+  - id: config-profile
+    type: local-credential-store
+    label: Databricks configuration profile
+    description: >-
+      Credentials stored locally in ~/.databrickscfg and selected per command
+      with `-p` / `--profile`, letting a developer "quickly switch among
+      different Databricks authentication contexts" without editing the bundle.
+    selector_flags:
+      - -p
+      - --profile
+target_binding:
+  description: >-
+    A bundle target can pin the workspace host and the profile it authenticates
+    with, so `databricks bundle deploy -t prod` resolves credentials for that
+    environment rather than whatever the shell happens to hold.
+  fields:
+    - targets.<name>.workspace.host
+    - targets.<name>.workspace.profile
+    - targets.<name>.workspace.auth_type
+    - run_as
+scopes_reference: ../scopes/databricks-asset-bundles-scopes.yml
+gaps:
+  - >-
+    The bundle authentication page defers the exact environment-variable names
+    and OAuth scopes to the general Databricks authorization guides rather than
+    naming them inline; they are not restated here as if the bundle page said
+    them.

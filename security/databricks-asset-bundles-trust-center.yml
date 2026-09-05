@@ -1,0 +1,40 @@
+generated: '2026-09-05'
+method: searched
+source: https://www.databricks.com/trust
+trust_center:
+  url: https://www.databricks.com/trust
+  probed_status: 200
+  compliance_page: https://www.databricks.com/trust/compliance
+  privacy_page: https://www.databricks.com/trust/privacy
+  ai_security_page: https://www.databricks.com/trust/ai-security
+  security_best_practices: https://www.databricks.com/trust/security-features/best-practices
+  report_an_issue: https://www.databricks.com/trust/report
+certifications:
+  - name: SOC 2 Type II
+    source: https://www.databricks.com/trust/compliance
+    publicly_downloadable: false
+    note: Available from a Databricks account team.
+  - name: ISO certifications
+    source: https://www.databricks.com/trust/compliance
+    publicly_downloadable: true
+    note: >-
+      Included in the self-service due diligence package alongside the annual
+      pen test confirmation letter. Specific ISO numbers are not listed on the
+      public page and are not asserted here.
+due_diligence_package:
+  available: true
+  contents_named:
+    - ISO certifications
+    - annual penetration test confirmation letter
+  gated_contents:
+    - Enterprise Security Guide
+    - SOC 2 Type II report
+bug_bounty:
+  program: HackerOne
+  url: https://hackerone.com/databricks
+  source: https://www.databricks.com/.well-known/security.txt
+gaps:
+  - >-
+    The public trust pages do not enumerate FedRAMP, HIPAA, PCI DSS, IRAP, C5 or
+    HITRUST by name in the content retrieved, so none of those is recorded even
+    though larger Databricks marketing surfaces reference regulated industries.

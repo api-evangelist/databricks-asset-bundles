@@ -1,0 +1,55 @@
+generated: '2026-09-05'
+method: probed
+source: https://accounts.cloud.databricks.com/oidc/.well-known/oauth-authorization-server
+docs: https://docs.databricks.com/aws/en/dev-tools/auth/oauth-m2m
+note: >-
+  The baseline scope list is read verbatim from the RFC 8414 authorization
+  server metadata document Databricks serves anonymously on the account console
+  host — not from prose. The managed-MCP scopes below are read from the
+  managed MCP documentation and are not present in scopes_supported.
+authorization_server:
+  issuer: https://accounts.cloud.databricks.com/oidc
+  authorization_endpoint: https://accounts.cloud.databricks.com/oidc/v1/authorize
+  token_endpoint: https://accounts.cloud.databricks.com/oidc/v1/token
+  jwks_uri: https://accounts.cloud.databricks.com/oidc/jwks.json
+  grant_types_supported:
+    - client_credentials
+    - authorization_code
+    - refresh_token
+  code_challenge_methods_supported:
+    - S256
+scopes:
+  - name: all-apis
+    description: >-
+      Full access to every Databricks REST API the principal is entitled to.
+      This is the scope the Databricks CLI (and therefore every `databricks
+      bundle` command) requests for OAuth U2M and M2M authentication.
+    source: scopes_supported
+  - name: sql
+    description: Access to Databricks SQL warehouses and query APIs.
+    source: scopes_supported
+  - name: openid
+    description: OIDC — request an ID token.
+    source: scopes_supported
+  - name: profile
+    description: OIDC — basic profile claims (name, family_name, given_name, preferred_username).
+    source: scopes_supported
+  - name: email
+    description: OIDC — email claim.
+    source: scopes_supported
+  - name: offline_access
+    description: Issue a refresh token so the CLI can renew without re-prompting.
+    source: scopes_supported
+  - name: genie
+    description: Access the Genie One / Genie Agent managed MCP servers.
+    source: managed-mcp-docs
+    docs: https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp
+  - name: ai-search
+    description: Access the AI Search (vector search index) managed MCP server.
+    source: managed-mcp-docs
+    docs: https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp
+  - name: unity-catalog
+    description: Access the Unity Catalog functions managed MCP server.
+    source: managed-mcp-docs
+    docs: https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp
+scope_count: 9

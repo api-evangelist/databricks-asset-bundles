@@ -1,0 +1,80 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.databricks.com/aws/en/release-notes/dev-tools/bundles
+secondary_source: https://github.com/databricks/cli/releases
+scheme: semver
+versioned_against: Databricks CLI releases
+current_version: v1.15.0
+current_version_released: '2026-09-03'
+cadence: >-
+  Roughly weekly CLI releases (8 releases between 2026-07-29 and 2026-09-03),
+  with a curated, dated product release-note page for bundle-affecting changes.
+entries:
+  - version: CLI 1.3.0
+    date: '2026-06-10'
+    type: addition
+    highlight: >-
+      Genie Agents (formerly Genie Spaces) can now be defined in Declarative
+      Automation Bundles configuration.
+  - version: CLI 1.3.0
+    date: '2026-06-10'
+    type: status-change
+    breaking: true
+    highlight: >-
+      The direct deployment engine is generally available. New bundles created
+      with CLI 1.3.0 and above use it by default instead of the Terraform
+      deployment engine.
+  - version: CLI 1.2.0
+    date: '2026-06-04'
+    type: addition
+    highlight: >-
+      `databricks bundle plan` and `databricks bundle deploy` gain `--select`,
+      to plan or deploy only the specified resource(s).
+  - version: CLI 1.1.0
+    date: '2026-05-27'
+    type: addition
+    highlight: >-
+      Vector search endpoints and indexes can now be defined in bundle
+      configuration.
+  - version: null
+    date: '2026-04-29'
+    type: addition
+    highlight: >-
+      Custom bundle templates can be made available to users developing bundles
+      in the workspace.
+  - version: null
+    date: '2026-03-16'
+    type: rename
+    breaking: false
+    highlight: >-
+      Databricks Asset Bundles renamed to Declarative Automation Bundles.
+  - version: CLI 0.287.0
+    date: '2026-02-05'
+    type: addition
+    highlight: >-
+      Lakebase Postgres projects, branches, and compute endpoints can be
+      defined in bundle configuration.
+  - version: CLI 0.279.0
+    date: '2025-12-04'
+    type: addition
+    highlight: >-
+      New `databricks bundle migrate` command to migrate bundles onto the direct
+      deployment engine, ahead of it becoming the default.
+recent_cli_releases:
+  - version: v1.15.0
+    date: '2026-09-03'
+  - version: v1.14.1
+    date: '2026-08-28'
+  - version: v1.14.0
+    date: '2026-08-26'
+  - version: v1.13.0
+    date: '2026-08-20'
+  - version: v1.12.1
+    date: '2026-08-12'
+  - version: v1.12.0
+    date: '2026-08-12'
+  - version: v1.11.0
+    date: '2026-08-06'
+  - version: v1.10.0
+    date: '2026-07-29'
+full_changelog: https://github.com/databricks/cli/blob/main/CHANGELOG.md

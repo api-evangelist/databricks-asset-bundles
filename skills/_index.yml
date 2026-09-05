@@ -1,0 +1,34 @@
+generated: '2026-09-05'
+method: searched
+source: https://github.com/databricks/cli/blob/main/AGENTS.md
+note: >-
+  Databricks publishes its own agent instructions in the Databricks CLI
+  repository — the tool that implements every `databricks bundle` command. That
+  file is saved verbatim as databricks-asset-bundles-agents.md and is the
+  provider-authored skill; the second entry is an API Evangelist packaged skill
+  grounded only in documented CLI commands, since there is no OpenAPI to ground
+  operationIds in.
+skills:
+  - name: databricks-cli-agents
+    file: databricks-asset-bundles-agents.md
+    method: searched
+    authored_by: provider
+    source: https://raw.githubusercontent.com/databricks/cli/main/AGENTS.md
+    fetched: '2026-09-05'
+    http_status: 200
+    description: >-
+      Databricks' own AGENTS.md for the Databricks CLI repository — mandatory
+      RULE-prefixed guidance for AI assistants working in the codebase that
+      builds and ships Declarative Automation Bundles, including build/test/lint
+      task commands and the schema and codegen generators.
+    companion_rules: https://github.com/databricks/cli/tree/main/.agents/rules
+  - name: deploy-a-bundle
+    file: databricks-asset-bundles-deploy-a-bundle.md
+    method: generated
+    authored_by: api-evangelist
+    source: https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands
+    description: >-
+      Packaged operating instructions for the marquee flow — validate, plan,
+      deploy, run and tear down a bundle against a named target — grounded in
+      documented CLI commands and the idempotency/reversibility rules recorded
+      in conventions/.

@@ -1,17 +1,17 @@
-generated: '2026-07-11'
+generated: '2026-09-05'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: docs.databricks.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 19 23:59:59 2026 GMT
+  cert_expires: Feb  4 23:59:59 2027 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: www.databricks.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Nov 28 23:59:59 2026 GMT
+  cert_expires: Feb  3 23:59:59 2027 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: <workspace-instance>.cloud.databricks.com
@@ -20,12 +20,12 @@ domains:
 - domain: databricks.com
   dnssec: true
   caa:
+  - 0 issuewild "intermediatecertificate.digitalcertvalidation.com"
+  - 0 issuewild "letsencrypt.org;validationmethods=dns-01"
+  - 0 issuewild "pki.goog"
+  - 0 issuewild "rapidssl.com"
   - 0 issuewild "stratossl.digitalcertvalidation.com"
   - 0 issuewild "thawte.com"
-  - 0 issuewild "volusion.digitalcertvalidation.com"
-  - 0 issuewild "www.digicert.com"
-  - 0 iodef "mailto:entsec-caa-monitoring@databricks.com"
-  - 0 issue "1and1.digitalcertvalidation.com"
   spf: true
   dmarc: true
   dmarc_policy: reject

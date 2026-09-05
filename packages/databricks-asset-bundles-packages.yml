@@ -1,0 +1,93 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  PyPI JSON metadata endpoints (pypi.org/pypi/<pkg>/json), the npm registry
+  (registry.npmjs.org), and the GitHub Releases API for databricks/cli —
+  all queried unauthenticated on 2026-09-05.
+note: >-
+  Declarative Automation Bundles (formerly Databricks Asset Bundles) are driven
+  by the Databricks CLI, a Go binary distributed through GitHub Releases rather
+  than a language registry. The first-party language package specific to this
+  product is databricks-bundles on PyPI, which is the Python configuration
+  surface for bundles.
+packages:
+  - language: python
+    registry: pypi
+    name: databricks-bundles
+    url: https://pypi.org/project/databricks-bundles/
+    install: pip install databricks-bundles
+    official: true
+    version: 1.15.0
+    published: '2026-09-03'
+    description: Python support for Declarative Automation Bundles
+    note: >-
+      The first-party package specific to this product. Its version tracks the
+      Databricks CLI release line one-for-one (CLI v1.15.0 shipped 2026-09-03).
+  - language: go
+    registry: github-releases
+    name: databricks/cli
+    url: https://github.com/databricks/cli/releases
+    install: >-
+      brew tap databricks/tap && brew install databricks
+      (or curl -fsSL https://raw.githubusercontent.com/databricks/cli/main/install.sh | sh)
+    official: true
+    version: v1.15.0
+    published: '2026-09-03'
+    description: >-
+      The Databricks CLI — the binary that runs every `databricks bundle`
+      command. Not published to a language registry; releases are the
+      distribution channel.
+    note: >-
+      There is no Go module install path for consumers; the CLI is consumed as a
+      release binary. Version and date read from the GitHub Releases API.
+  - language: python
+    registry: pypi
+    name: databricks-sdk
+    url: https://pypi.org/project/databricks-sdk/
+    install: pip install databricks-sdk
+    official: true
+    version: 0.135.0
+    published: '2026-09-04'
+    description: Databricks SDK for Python (Beta)
+    note: >-
+      Platform SDK, not bundle-specific, but the library bundle-deployed Python
+      code uses to call the same workspace APIs the CLI deploys against.
+  - language: javascript
+    registry: npm
+    name: '@databricks/sql'
+    url: https://www.npmjs.com/package/@databricks/sql
+    install: npm install @databricks/sql
+    official: true
+    version: 2.1.0
+    published: '2026-09-01'
+    description: Driver for connection to Databricks SQL via Thrift API
+    note: Platform SDK; no bundle surface. Recorded for completeness of the first-party set.
+  - language: python
+    registry: pypi
+    name: databricks-cli
+    url: https://pypi.org/project/databricks-cli/
+    install: pip install databricks-cli
+    official: true
+    deprecated: true
+    version: 0.18.0
+    published: '2023-10-05'
+    description: The legacy Python Databricks CLI, superseded by the Go CLI
+    note: >-
+      DECAY SIGNAL, recorded honestly: this package has not shipped since
+      2023-10-05 and predates bundles entirely. It is superseded by the Go CLI
+      (databricks/cli), which is the only CLI that implements `databricks
+      bundle`. Anyone who pip-installs this name gets a tool that cannot deploy
+      a bundle.
+registries_probed:
+  - registry: pypi
+    result: hit
+  - registry: npm
+    result: hit
+  - registry: crates.io
+    result: miss
+    note: no `databricks` crate exists (404 from crates.io API)
+  - registry: github-releases
+    result: hit
+  - registry: rubygems
+    result: not-probed
+    note: Databricks publishes no Ruby client

@@ -1,0 +1,92 @@
+generated: '2026-09-05'
+method: probed
+source: live HTTPS probes of every host in apis.yml (registrable domain, www, docs host, account console host)
+note: >-
+  databricks.com and www.databricks.com serve a real RFC 9116 security.txt.
+  docs.databricks.com serves nothing under /.well-known/. The account console
+  (accounts.cloud.databricks.com) answers HTTP 200 with the SPA shell for every
+  /.well-known/* path, so those are recorded as misses, not documents. The real
+  OAuth/OIDC discovery documents on that host live one level down, under
+  /oidc/.well-known/, and are recorded here at their actual paths.
+hosts:
+  - host: databricks.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: databricks-asset-bundles-security.txt
+        content_type: text/plain
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: www.databricks.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: databricks-asset-bundles-security.txt
+        content_type: text/plain
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: docs.databricks.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: accounts.cloud.databricks.com
+    documents:
+      - path: /oidc/.well-known/oauth-authorization-server
+        status: 200
+        file: databricks-asset-bundles-oauth-authorization-server.json
+        content_type: application/json
+      - path: /oidc/.well-known/openid-configuration
+        status: 200
+        file: databricks-asset-bundles-openid-configuration.json
+        content_type: application/json
+      - path: /.well-known/security.txt
+        status: 200
+        note: SPA shell (text/html), not a document — recorded as a miss
+      - path: /.well-known/api-catalog
+        status: 200
+        note: SPA shell (text/html), not a document — recorded as a miss
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA shell (text/html), not an AgentCard — recorded as a miss
+      - path: /.well-known/agent.json
+        status: 200
+        note: SPA shell (text/html), not an AgentCard — recorded as a miss
+sibling_hosts_probed:
+  - host: accounts.azuredatabricks.net
+    path: /oidc/.well-known/oauth-authorization-server
+    status: 200
+  - host: accounts.gcp.databricks.com
+    path: /oidc/.well-known/oauth-authorization-server
+    status: 200

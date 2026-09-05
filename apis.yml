@@ -5,7 +5,13 @@ description: >-
   managing Databricks data and AI projects. Bundles enable version control,
   CI/CD, deployment, and management of Databricks resources such as jobs,
   pipelines, apps, schemas, experiments, and model serving endpoints across
-  workspaces using the Databricks CLI.
+  workspaces using the Databricks CLI. Databricks renamed the product to
+  Declarative Automation Bundles on 2026-03-16; the DABs acronym, the
+  databricks.yml configuration file and the `databricks bundle` command surface
+  are unchanged. The contract is a first-party JSON Schema for databricks.yml
+  published in the databricks/cli repository and readable at runtime with
+  `databricks bundle schema` — there is no OpenAPI, because bundles are driven
+  by the CLI rather than by an HTTP API of their own.
 type: Index
 deliveryModel:
   model: unknown
@@ -57,7 +63,7 @@ tags_raw:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/databricks-asset-bundles/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-04-28'
+modified: '2026-09-05'
 specificationVersion: '0.23'
 kind: company
 position: Consuming
@@ -96,7 +102,7 @@ apis:
       - type: FAQ
         url: https://docs.databricks.com/aws/en/dev-tools/bundles/faqs
       - type: JSONSchema
-        url: json-schema/bundle.json
+        url: json-schema/databricks-asset-bundles-bundle-jsonschema.json
     contact:
       - FN: Databricks Support
         email: support@databricks.com
@@ -125,7 +131,7 @@ common:
   - type: CLI Reference
     url: https://docs.databricks.com/aws/en/dev-tools/cli/bundle-commands
   - type: Authentication
-    url: https://docs.databricks.com/aws/en/dev-tools/bundles/authentication
+    url: authentication/databricks-asset-bundles-authentication.yml
   - type: Resources
     url: https://docs.databricks.com/aws/en/dev-tools/bundles/resources
   - type: Templates
@@ -151,7 +157,7 @@ common:
   - type: FAQ
     url: https://docs.databricks.com/aws/en/dev-tools/bundles/faqs
   - type: ChangeLog
-    url: https://docs.databricks.com/aws/en/release-notes/dev-tools/bundles
+    url: changelog/databricks-asset-bundles-changelog.yml
   - type: GitHubRepository
     url: https://github.com/databricks/cli
   - type: GitHub Examples
@@ -196,8 +202,55 @@ common:
     url: https://www.databricks.com/partners
   - type: LlmsText
     url: https://docs.databricks.com/llms.txt
+  - type: WellKnown
+    url: well-known/databricks-asset-bundles-well-known.yml
+  - type: SecurityTxt
+    url: well-known/databricks-asset-bundles-security.txt
+  - type: Packages
+    url: packages/databricks-asset-bundles-packages.yml
+  - type: SDKs
+    url: packages/databricks-asset-bundles-packages.yml
+  - type: CLI
+    url: cli/databricks-asset-bundles-cli.yml
+  - type: MCPServer
+    url: mcp/databricks-asset-bundles-mcp.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/databricks-asset-bundles-llms.txt
+  - type: Conventions
+    url: conventions/databricks-asset-bundles-conventions.yml
+  - type: Idempotency
+    url: conventions/databricks-asset-bundles-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/databricks-asset-bundles-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/databricks-asset-bundles-lifecycle.yml
+  - type: OAuthScopes
+    url: scopes/databricks-asset-bundles-scopes.yml
+  - type: Conformance
+    url: conformance/databricks-asset-bundles-conformance.yml
+  - type: Compliance
+    url: conformance/databricks-asset-bundles-conformance.yml
+  - type: TrustCenter
+    url: security/databricks-asset-bundles-trust-center.yml
+  - type: Sandbox
+    url: sandbox/databricks-asset-bundles-sandbox.yml
+  - type: DataModel
+    url: data-model/databricks-asset-bundles-data-model.yml
+  - type: Plans
+    url: plans/databricks-asset-bundles-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/databricks-asset-bundles-rate-limits.yml
 integrations:
   - name: Partner Spotlight Featured partner announcements
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-05'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v3
+x-parent: databricks
+x-relationship: product

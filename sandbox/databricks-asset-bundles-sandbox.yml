@@ -1,0 +1,60 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://docs.databricks.com/aws/en/getting-started/free-edition ;
+  https://www.databricks.com/product/pricing
+summary: >-
+  There is no bundle-specific sandbox or mock deployment target. What a
+  developer can get for free is a real Databricks workspace — Free Edition —
+  and deploy real bundles into it. The rehearsal mechanism for bundles is
+  `databricks bundle plan` / `validate`, not a test-mode credential.
+environments:
+  - name: Databricks Free Edition
+    type: free-tier-workspace
+    url: https://docs.databricks.com/aws/en/getting-started/free-edition
+    trial: false
+    permanent: true
+    description: >-
+      "a no-cost version of Databricks designed for students, educators,
+      hobbyists, and anyone interested in learning or experimenting." Serverless
+      only and quota limited.
+    includes:
+      - Build AI applications and agents
+      - Collaborate on data science and ML projects with shared notebooks
+      - Explore and analyze real datasets via SQL editor or notebooks
+      - Create interactive dashboards using Genie
+      - Design and test data pipelines through Lakeflow
+      - Genie Code in-product coding assistance
+      - Lakebase Postgres
+    limits: >-
+      Described as "serverless-only, quota-limited"; the specific quota numbers
+      live on a separate Free Edition limitations page and are not restated
+      here.
+  - name: Databricks free trial
+    type: trial
+    url: https://www.databricks.com/try-databricks
+    description: >-
+      Free access to the Databricks Data + AI Platform. The pricing page does
+      not state the trial length, so none is recorded.
+    caveat: >-
+      "If you configure Databricks to work with your own cloud account, you will
+      still be charged by your cloud provider for resources."
+test_credentials:
+  published: false
+  note: >-
+    Databricks publishes no test-mode API keys, no test key prefix, and no
+    fixture identifiers. Bundles authenticate with the same OAuth credentials
+    against a real workspace regardless of target; separation is by workspace
+    and by deployment mode, not by a test key.
+rehearsal:
+  - command: databricks bundle validate
+    description: Validate configuration syntax without deploying.
+  - command: databricks bundle plan
+    description: Show the deployment plan without making changes.
+  - command: databricks bundle sync --dry-run
+    description: Report which files would sync without writing them.
+  - mechanism: development deployment mode
+    description: >-
+      Prefixes every resource with "[dev <user>]", pauses all schedules and
+      triggers, and tags resources dev — the closest thing to a sandbox the
+      product ships, inside a real workspace.

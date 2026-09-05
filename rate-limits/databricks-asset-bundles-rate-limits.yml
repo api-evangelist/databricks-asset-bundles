@@ -4,94 +4,128 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Databricks Asset Bundles
 providerId: databricks-asset-bundles
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-09-05'
+generated: '2026-09-05'
+method: searched
+source: https://docs.databricks.com/aws/en/resources/limits
+docs: https://docs.databricks.com/aws/en/resources/limits
+limit_count: 14
 tags:
   - CI/CD
-  - Data Engineering
   - Databricks
   - Deployment
   - Infrastructure as Code
-  - Jobs
-  - Machine Learning
-  - MLOps
-  - Pipelines
-  - Workflows
   - Rate Limiting
   - Quotas
   - Throttling
-description: Machine-readable rate limit definitions for the Databricks Asset Bundles API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
+description: >-
+  Published Databricks REST API rate limits, read from the provider's own
+  resource-limits page (current as of 2026-09-02 per that page). This file
+  replaces a 2026-05-04 scaffold whose free/professional/enterprise request
+  quotas were invented — Databricks publishes no per-tier request quota. Limits
+  are per workspace or per account, not per API key, and Declarative Automation
+  Bundles inherit them because the CLI calls these same APIs.
+scope_note: >-
+  There is no bundle-specific rate limit. `databricks bundle deploy` fans out
+  across the Jobs, Pipelines and Workspace APIs, so the limits that bite a large
+  bundle are the Jobs and Workspace ones below.
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+  note: >-
+    HONEST GAP. Databricks does not document any rate-limit response headers —
+    no X-RateLimit-*, no RateLimit-*, no Retry-After — and does not state the
+    HTTP status returned on exhaustion. A client cannot read its remaining
+    budget from a response; it can only read the documented numbers. The prior
+    version of this file asserted a full X-RateLimit-* header set that
+    Databricks has never published.
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  throttled: null
+  note: The documentation does not state the status code returned when a limit is exceeded.
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: DBFS API
+    scope: workspace
+    metric: requests_per_second
+    limit: 30
+    timeFrame: second
+    fixed: true
+  - name: OpenSharing APIs (Providers, Recipients, Shares)
+    scope: workspace
+    metric: requests_per_second
+    limit: 400
+    timeFrame: second
+  - name: Jobs API — create, get, list, reset, run-now
+    scope: workspace
+    metric: requests_per_second
+    limit: 20
+    timeFrame: second
+  - name: Jobs API — delete, update
+    scope: workspace
+    metric: requests_per_second
     limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Databricks Asset Bundles API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Databricks Asset Bundles API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
+    timeFrame: second
+  - name: Jobs API — runs/get
+    scope: workspace
+    metric: requests_per_second
     limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Databricks Asset Bundles API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Databricks Asset Bundles API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
+    timeFrame: second
+  - name: SCIM API — account-level GET
+    scope: account
+    metric: requests_per_second
+    limit: 20
+    timeFrame: second
+  - name: SCIM API — workspace-level GET
+    scope: workspace
     metric: requests_per_minute
-    limit: 1000
-    burst: 5000
+    limit: 255
     timeFrame: minute
-    applies:
-      - Databricks Asset Bundles API
+  - name: Workspace API — export
+    scope: workspace
+    metric: requests_per_second
+    limit: 60
+    timeFrame: second
+  - name: Workspace API — import
+    scope: workspace
+    metric: requests_per_second
+    limit: 30
+    timeFrame: second
+  - name: Workspace API — list
+    scope: workspace
+    metric: requests_per_second
+    limit: 50
+    timeFrame: second
+  - name: Workspace API — delete
+    scope: workspace
+    metric: requests_per_second
+    limit: 2
+    timeFrame: second
+  - name: MLflow Tracking — most operations
+    scope: workspace
+    metric: requests_per_second
+    limit: 120
+    timeFrame: second
+  - name: MLflow Tracking — search / list
+    scope: workspace
+    metric: requests_per_second
+    limit: 7
+    timeFrame: second
+  - name: Secrets API
+    scope: workspace
+    metric: requests_per_minute
+    limit: 1100
+    timeFrame: minute
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Fixed vs adjustable
+    description: >-
+      The limits page marks each limit as fixed (not requestable) or adjustable.
+      Adjustable limits are raised through Databricks support, not through a
+      plan upgrade.
+  - name: Currency
+    description: >-
+      The provider states the published limits are current as of 2026-09-02.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

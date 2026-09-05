@@ -1,0 +1,59 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp
+scope_note: >-
+  IMPORTANT SCOPE CAVEAT. Databricks ships hosted MCP servers, but they expose
+  workspace DATA and AI surfaces (Genie, Databricks SQL, Unity Catalog
+  functions, Vector Search) — they do NOT expose bundle lifecycle operations.
+  There is no MCP tool for `databricks bundle deploy` / `plan` / `destroy`. The
+  agent-facing surface for this product is the CLI plus the published bundle
+  JSON Schema, not MCP. This manifest records the servers Databricks actually
+  hosts, with that boundary stated rather than blurred.
+deployment:
+  mode: remote
+  endpoint: https://<workspace-hostname>/api/2.0/mcp
+  auth: oauth
+  verified: searched
+  note: >-
+    Every endpoint is templated on the customer's own workspace hostname; there
+    is no single shared host to POST tools/list against, so no anonymous probe
+    is possible and none was attempted. Recorded as `searched` (read from
+    Databricks' own documentation), never `probed`.
+servers:
+  - name: Genie One
+    endpoint: https://<workspace-hostname>/api/2.0/mcp/genie
+    oauth_scope: genie
+    hosted_by: databricks
+  - name: Genie Agent
+    endpoint: https://<workspace-hostname>/api/2.0/mcp/genie/{genie_space_id}
+    oauth_scope: genie
+    hosted_by: databricks
+  - name: AI Search
+    endpoint: https://<workspace-hostname>/api/2.0/mcp/ai-search/{catalog}/{schema}/{index_name}
+    oauth_scope: ai-search
+    hosted_by: databricks
+  - name: Databricks SQL
+    endpoint: https://<workspace-hostname>/api/2.0/mcp/sql
+    oauth_scope: sql
+    hosted_by: databricks
+  - name: Unity Catalog functions
+    endpoint: https://<workspace-hostname>/api/2.0/mcp/functions/{catalog}/{schema}/{function_name}
+    oauth_scope: unity-catalog
+    hosted_by: databricks
+  - name: External MCP proxy
+    endpoint: https://<workspace-hostname>/api/2.0/mcp/external/{connection_name}
+    oauth_scope: unknown
+    hosted_by: databricks
+    note: >-
+      A managed proxy in front of a third-party MCP server the customer
+      registers; the tools are the external server's, not Databricks'.
+tools:
+  status: not-enumerated
+  reason: >-
+    tools/list requires an authenticated POST against a specific customer
+    workspace. No tool names or inputSchemas were captured, and none are
+    asserted here.
+authorization:
+  metadata_document: https://accounts.cloud.databricks.com/oidc/.well-known/oauth-authorization-server
+  file: ../well-known/databricks-asset-bundles-oauth-authorization-server.json
+  scopes_reference: ../scopes/databricks-asset-bundles-scopes.yml
