@@ -1,0 +1,34 @@
+# Front Door AI Index — databricks-asset-bundles — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: databricks-asset-bundles
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.databricks.com
+  final_host: www.databricks.com
+  ownership: shared
+  owner: databricks
+  shares_host_with:
+  - databricks
+  - lakehouse-architecture
+  - mosaicml
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 61
+  density: null
+  words: 1425
+  tiers:
+    agentic: 3
+    core: 58
+    model: 0
+  ambiguous: 8
+  top_terms:
+    AI: 55
+    agent: 7
+    AI agent: 2
+    ML: 2
+    agentic: 1
+    gen ai: 1
+    smart: 1
