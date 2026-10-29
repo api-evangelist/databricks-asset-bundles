@@ -1,4 +1,4 @@
-# Databricks Asset Bundles (databricks-asset-bundles)
+# Databricks Asset Bundles
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,61 +64,154 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Databricks Asset Bundles (DABs) provide an infrastructure-as-code approach to managing Databricks data and AI projects. Bundles enable version control, CI/CD, deployment, and management of Databricks resources such as jobs, pipelines, apps, schemas, experiments, and model serving endpoints across workspaces using the Databricks CLI.
+Databricks Asset Bundles (DABs) provide an infrastructure-as-code approach to managing Databricks data and AI projects. Bundles enable version control, CI/CD, deployment, and management of Databricks resources such as jobs, pipelines, apps, schemas, experiments, and model serving endpoints across workspaces using the Databricks CLI. Databricks renamed the product to Declarative Automation Bundles on 2026-03-16; the DABs acronym, the databricks.yml configuration file and the `databricks bundle` command surface are unchanged. The contract is a first-party JSON Schema for databricks.yml published in the databricks/cli repository and readable at runtime with `databricks bundle schema` — there is no OpenAPI, because bundles are driven by the CLI rather than by an HTTP API of their own.
 
-**URL:** [Visit APIs.yml URL](https://raw.githubusercontent.com/api-evangelist/databricks-asset-bundles/refs/heads/main/apis.yml)
+**Areas:** CI/CD · Data Engineering · Databricks · Deployment · Infrastructure as Code · Job · Machine Learning · MLOps · Pipelines · Workflows
 
-## Scope
+## Databricks Asset Bundles on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
-- **xType:** company
+Everything profiled for Databricks Asset Bundles is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/databricks-asset-bundles/](https://apis.io/providers/databricks-asset-bundles/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- CI/CD, Data Engineering, Databricks, Deployment, Infrastructure as Code, Jobs, Machine Learning, MLOps, Pipelines, Workflows
+- [Databricks Asset Bundles API](https://apis.io/apis/databricks-asset-bundles/databricks-asset-bundles-api/) — The Databricks Asset Bundles API provides CLI-driven endpoints for initializing, validating, deploying, running, and destroying bundles of Databricks…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Databricks Asset Bundles API
-The Databricks Asset Bundles API provides CLI-driven endpoints for initializing, validating, deploying, running, and destroying bundles of Databricks resources.
+Model Context Protocol servers that expose the API to agents.
 
-**Human URL:** [https://docs.databricks.com/aws/en/dev-tools/bundles](https://docs.databricks.com/aws/en/dev-tools/bundles)
+- [databricks-asset-bundles-mcp.yml](https://apis.io/servers/databricks-asset-bundles/databricks-asset-bundles-mcp-yml/)
 
-#### Tags
+#### JSON Schema (2)
 
-- Bundles, CI/CD, Deployment, Infrastructure as Code, Workflows
+The data models the API reads and writes.
 
-#### Properties
+- [Databricks Asset Bundle](https://apis.io/schemas/databricks-asset-bundles/bundle/)
+- [Databricks Asset Bundles Bundle Jsonschema](https://apis.io/schemas/databricks-asset-bundles/databricks-asset-bundles-bundle-jsonschema/)
 
-- [Documentation](https://docs.databricks.com/aws/en/dev-tools/bundles)
-- [Reference](https://docs.databricks.com/aws/en/dev-tools/bundles/reference)
-- [Authentication](https://docs.databricks.com/aws/en/dev-tools/bundles/authentication)
-- [Getting Started](https://docs.databricks.com/aws/en/dev-tools/bundles/jobs-tutorial)
-- [Change Log](https://docs.databricks.com/aws/en/release-notes/dev-tools/bundles)
-- [FAQ](https://docs.databricks.com/aws/en/dev-tools/bundles/faqs)
-- [JSONSchema](json-schema/bundle.json)
+#### JSON-LD (1)
 
-## Common Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Portal](https://docs.databricks.com/aws/en/dev-tools/bundles)
-- [Getting Started](https://docs.databricks.com/aws/en/dev-tools/bundles/jobs-tutorial)
+- [Databricks Asset Bundles Context](https://apis.io/jsonld/databricks-asset-bundles/databricks-asset-bundles-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Databricks Asset Bundles Vocabulary](https://apis.io/vocabularies/databricks-asset-bundles/databricks-asset-bundles-vocabulary/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Databricks Asset Bundles — jsonschema rules](https://apis.io/rules/databricks-asset-bundles/databricks-asset-bundles-jsonschema-spectral-rules/)
+- [Databricks Asset Bundles API Rules](https://apis.io/rules/databricks-asset-bundles/databricks-asset-bundles-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Databricks Asset Bundles Authentication](https://apis.io/security/databricks-asset-bundles/databricks-asset-bundles-authentication/)
+- [Databricks Asset Bundles Domain Security](https://apis.io/security/databricks-asset-bundles/databricks-asset-bundles-domain-security/)
+- [Databricks Asset Bundles Trust Center](https://apis.io/security/databricks-asset-bundles/databricks-asset-bundles-trust-center/)
+- [Databricks Asset Bundles Vulnerability Disclosure](https://apis.io/security/databricks-asset-bundles/databricks-asset-bundles-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Databricks Asset Bundles Scopes](https://apis.io/scopes/databricks-asset-bundles/databricks-asset-bundles-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Databricks Asset Bundles Plans Pricing](https://apis.io/plans/databricks-asset-bundles/databricks-asset-bundles-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Databricks Asset Bundles Rate Limits](https://apis.io/rate-limits/databricks-asset-bundles/databricks-asset-bundles-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Databricks Asset Bundles Finops](https://apis.io/finops/databricks-asset-bundles/databricks-asset-bundles-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.databricks.com/)
 - [Documentation](https://docs.databricks.com/aws/en/dev-tools/bundles/settings)
-- [Reference](https://docs.databricks.com/aws/en/dev-tools/bundles/reference)
-- [GitHub Repository](https://github.com/databricks/cli)
-- [GitHub Examples](https://github.com/databricks/bundle-examples)
-- [JSON-LD](json-ld/databricks-asset-bundles-context.jsonld)
-- [Vocabulary](vocabulary/databricks-asset-bundles-vocabulary.yml)
-- [Capabilities](capabilities/databricks-asset-bundles-capabilities.yml)
-- [Rules](rules/databricks-asset-bundles-rules.yml)
+- [Getting started](https://docs.databricks.com/aws/en/dev-tools/bundles/jobs-tutorial)
+- [Pricing](https://www.databricks.com/product/pricing)
+- [Support](https://help.databricks.com/)
+- [Blog](https://www.databricks.com/blog)
+- [Security](https://www.databricks.com/trust)
+- [Terms of service](https://www.databricks.com/legal/terms-of-use)
+- [Privacy policy](https://www.databricks.com/legal/privacynotice)
+- [GitHub](https://github.com/databricks)
+- [Status](https://status.databricks.com/)
 
-## Maintainers
+## API Evangelist rating
 
-- **FN:** Kin Lane
-- **Email:** kin@apievangelist.com
+**Kin Score 65.0** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 13.9 |
+| Contract governance | 45.5 |
+| Operational transparency | 84.2 |
+| Developer ergonomics | 85.7 |
+| Access clarity | 85.5 |
+
+**Agent readiness 25.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | templated |
+| Auth Clarity | served (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 41.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/databricks-asset-bundles/](https://apis.io/providers/databricks-asset-bundles/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Databricks Asset Bundles: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/databricks-asset-bundles/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
