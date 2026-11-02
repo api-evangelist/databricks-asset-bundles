@@ -1,0 +1,139 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Databricks Asset Bundles
+providerId: databricks-asset-bundles
+created: '2026-05-04'
+modified: '2026-09-05'
+generated: '2026-09-05'
+method: searched
+source: https://www.databricks.com/product/pricing
+docs: https://www.databricks.com/product/pricing
+plan_count: 4
+tags:
+  - CI/CD
+  - Databricks
+  - Deployment
+  - Infrastructure as Code
+  - Pricing
+description: >-
+  Databricks pricing as the provider publishes it. This file replaces a
+  2026-05-04 scaffold that invented Free / Professional / Enterprise tiers with
+  monthly API-request quotas and per-request overage — none of which Databricks
+  sells. Databricks does not price API requests at all: it prices consumption in
+  DBUs, billed per second, pay-as-you-go. Declarative Automation Bundles
+  themselves carry no charge; the CLI and the bundle configuration surface are
+  free, and cost is incurred by whatever compute the deployed jobs, pipelines
+  and endpoints consume.
+billing_model:
+  unit: DBU (Databricks Unit)
+  unit_definition: >-
+    "a normalized unit of processing power on the Databricks Lakehouse Platform
+    used for measurement and pricing purposes"
+  model: pay-as-you-go, no upfront cost
+  granularity: per second
+  api_request_pricing: false
+  cloud_costs_separate: true
+  cloud_costs_note: >-
+    "If you configure Databricks to work with your own cloud account, you will
+    still be charged by your cloud provider for resources."
+plans:
+  - id: databricks-free-edition
+    name: Free Edition
+    type: free
+    price: '0.00'
+    currency: USD
+    billingPeriod: none
+    url: https://docs.databricks.com/aws/en/getting-started/free-edition
+    description: >-
+      A permanent no-cost Databricks workspace "designed for students,
+      educators, hobbyists, and anyone interested in learning or experimenting."
+      Serverless only and quota limited. Bundles can be deployed into it.
+    limits:
+      quota: >-
+        "serverless-only, quota-limited" — specific quota numbers live on a
+        separate Free Edition limitations page and are not restated here.
+    overage: null
+  - id: databricks-free-trial
+    name: Free trial
+    type: trial
+    price: '0.00'
+    currency: USD
+    billingPeriod: trial
+    url: https://www.databricks.com/try-databricks
+    description: >-
+      Free access to the Databricks Data + AI Platform. The pricing page does
+      not state the trial length, so none is recorded here.
+    limits: null
+    overage: null
+  - id: databricks-pay-as-you-go
+    name: Pay-as-you-go
+    type: usage-based
+    price: null
+    currency: USD
+    billingPeriod: per-second
+    url: https://www.databricks.com/product/pricing
+    description: >-
+      Consumption billing in DBUs at per-second granularity, priced per product
+      and per cloud. The pricing page references a separate Price List rather
+      than displaying per-DBU dollar figures inline, so no per-DBU rate is
+      recorded here.
+    limits:
+      included_quota: none
+    overage: >-
+      Not applicable — there is no included quota to exceed; every DBU consumed
+      is billed.
+  - id: databricks-committed-use
+    name: Committed Use Contract
+    type: enterprise
+    price: custom
+    currency: USD
+    billingPeriod: contract
+    url: https://www.databricks.com/product/pricing
+    description: >-
+      Discounts in exchange for committing to a usage level. The page states
+      "Contact us for details" — pricing is sales-gated.
+    limits: null
+    overage: null
+notes:
+  - >-
+    No Databricks plan meters, quotas or prices API requests, so the API Commons
+    `entries[]` quota/rate shape is deliberately left empty rather than filled
+    with invented numbers. The real runtime ceilings are per-workspace request
+    rates and live in rate-limits/databricks-asset-bundles-rate-limits.yml.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - negotiated
+  units: []
+  plans:
+  - name: Free Edition
+    access: free
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Free trial
+    access: trial
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pay-as-you-go
+    access: other
+    model: metered
+    model_how: stated
+    units: []
+    periods: []
+  - name: Committed Use Contract
+    access: enterprise
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
